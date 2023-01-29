@@ -1,14 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
-import logger from 'redux-logger';
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+
+
 const configureAppStore = (initialState = {}) => {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
-  const middleware = [sagaMiddleware, logger];
+  const middleware = [sagaMiddleware];
 
   const store = configureStore({
     reducer: rootReducer,

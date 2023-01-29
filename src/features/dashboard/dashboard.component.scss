@@ -9,12 +9,23 @@
 
   &__tiles-wrapper {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-gap: 26px;
-    margin: 0 30px;
+    margin: 0 30px 30px;
   }
 
   &__search {
     margin: 27px 0 20px 30px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .hm-dashboard {
+    justify-content: center;
+
+    &__tiles-wrapper {
+      justify-content: center;
+      justify-items: center;
+    }
   }
 }

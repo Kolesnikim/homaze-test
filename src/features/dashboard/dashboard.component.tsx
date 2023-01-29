@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import './dashboard.scss';
-import { contractsActions } from "../../redux/counter/slice";
-import { useAppDispatch, useAppSelector } from "../../redux/counter/hooks";
-import HmDashboardTile from "../../components/dashboard-tile/dashboard-tile";
+
+import './dashboard.component.scss';
+import { contractsActions } from "../../redux/contracts/slice";
+import { useAppDispatch, useAppSelector } from "../../redux/contracts/hooks";
+import HmDashboardTile from "../../components/dashboard-tile/dashboard-tile.component";
 import InputComponent from "../../components/dashboard-base-input/dashboard-input.component";
-import {IContract} from "../../api/types";
+import { IContract } from "../../core/core.types";
 
 function HmDashboard(): JSX.Element {
     const [inputValue, setInputValue] = useState<string>('');
@@ -22,10 +23,12 @@ function HmDashboard(): JSX.Element {
     }, [])
 
     useEffect(() => {
-        if (inputValue.length === 1) setFilteredContracts(contracts);
-        if (inputValue.length < 2) return;
+        if (inputValue.length < 2) {
+            setFilteredContracts(contracts);
+            return;
+        }
 
-        const fc = filteredContracts.filter((contract) => {
+        const fc = contracts.filter((contract) => {
             return contract.customerName.includes(inputValue) || contract.address.includes(inputValue);
         })
 

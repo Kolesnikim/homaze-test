@@ -1,6 +1,7 @@
 import React, {CSSProperties} from "react";
 import { FaSearch } from 'react-icons/fa'
 import './icon.component.scss'
+import {IIconProps, TIconType} from "./icon.types";
 
 const icons = (type: TIconType): JSX.Element => {
     switch (type) {
@@ -11,16 +12,7 @@ const icons = (type: TIconType): JSX.Element => {
     }
 };
 
-export type TIconType = 'search' | string | undefined;
-
-export interface IIconProps {
-    className?: string,
-    onClick?: () => {},
-    style?: CSSProperties | undefined,
-    type: TIconType
-}
-
-const IconComponent = ({ className, onClick, style, type }: IIconProps): JSX.Element => (
+const HmIconComponent = ({ className, onClick, style, type }: IIconProps): JSX.Element => (
     <i
         role="presentation"
         aria-hidden="true"
@@ -33,4 +25,4 @@ const IconComponent = ({ className, onClick, style, type }: IIconProps): JSX.Ele
     </i>
 );
 
-export default IconComponent;
+export default HmIconComponent;

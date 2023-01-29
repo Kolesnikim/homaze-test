@@ -7,7 +7,7 @@ import './index.scss';
 import App from './App';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
-import HmDashboard from "./features/dashboard/dashboard";
+import HmDashboard from "./features/dashboard/dashboard.component";
 
 const router = createBrowserRouter([
     {

@@ -1,7 +1,8 @@
 import { Effect, ForkEffect, call, put, takeEvery } from 'redux-saga/effects';
+
 import { contractsActions } from './slice';
-import {ContractsApi} from "../../api/api";
-import {IContract} from "../../api/types";
+import { ContractsApi } from "../../core/core.api";
+import { IContract } from "../../core/core.types";
 
 export function* watchLoadContracts(): Generator<Effect, void> {
   try {
@@ -10,7 +11,6 @@ export function* watchLoadContracts(): Generator<Effect, void> {
     yield put(contractsActions.addContracts(contracts as IContract[]));
   } catch (e) {
     yield put(contractsActions.loadingFailed());
-
   }
 }
 

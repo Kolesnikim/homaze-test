@@ -1,37 +1,24 @@
-import React, {ChangeEventHandler, CSSProperties} from "react";
-import './dashboard-input.component.scss'
-import IconComponent, {TIconType} from "../icon/icon.component";
+import React, { memo } from "react";
 
-export interface IInputProps {
-    className?: string,
-    containerStyle?: CSSProperties | undefined,
-    errors?: string,
-    disabled?: boolean,
-    icon?: string,
-    inputStyle?: CSSProperties | undefined,
-    name?: string,
-    onChange?: ChangeEventHandler<HTMLInputElement> | undefined
-    placeholder?: string,
-    readOnly?: boolean,
-    required?: boolean,
-    type?: TIconType,
-    value?: string,
-    wrapperStyle?: CSSProperties | undefined,
-}
-const InputComponent = ({
-                            className,
-                            containerStyle,
-                            disabled,
-                            icon,
-                            inputStyle,
-                            name,
-                            onChange,
-                            placeholder,
-                            readOnly,
-                            type,
-                            value,
-                            wrapperStyle
-                        }: IInputProps): JSX.Element => {
+import './dashboard-input.component.scss';
+import { IInputProps } from "./dashboard-input.types";
+import IconComponent from "../icon/icon.component";
+
+// eslint-disable-next-line react/display-name
+const HmInputComponent = memo(({
+                                   className,
+                                   containerStyle,
+                                   disabled,
+                                   icon,
+                                   inputStyle,
+                                   name,
+                                   onChange,
+                                   placeholder,
+                                   readOnly,
+                                   type,
+                                   value,
+                                   wrapperStyle
+                               }: IInputProps): JSX.Element => {
     const inputRef = React.useRef<HTMLInputElement>(null);
 
     const handleClick = (): void => {
@@ -40,8 +27,8 @@ const InputComponent = ({
 
     return (
         <div className={className} style={wrapperStyle}>
-            <div onClick={handleClick} className="container" style={containerStyle}>
-                <IconComponent type={icon} className='search-icon__dashboard' />
+            <div onClick={handleClick} className="hm-container" style={containerStyle}>
+                <IconComponent type={icon} className='hm-search-icon__dashboard' />
                 <input
                     ref={inputRef}
                     aria-label={name}
@@ -58,5 +45,5 @@ const InputComponent = ({
             </div>
         </div>
     );
-};
-export default InputComponent;
+})
+export default HmInputComponent;

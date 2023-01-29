@@ -1,4 +1,4 @@
-import { contractsReducer } from './counter/slice';
+import { contractsReducer } from './contracts/slice';
 
 const rootReducer = {
   contracts: contractsReducer,

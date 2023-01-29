@@ -1,11 +1,9 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit';
-import { IContract } from "../../api/types";
 
-export interface IContractsState {
-  items: IContract[];
-  loading: boolean,
-  error: boolean
-}
+import { IContract } from "../../core/core.types";
+import { IContractsState } from "./contracts.types";
+
+
 
 const initialState: IContractsState = {
   items: [],

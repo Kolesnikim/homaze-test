@@ -1,7 +1,8 @@
 import React from 'react';
-import './App.scss';
 import { Outlet } from "react-router-dom";
-import HmHeader from "./components/header/header";
+
+import './App.scss';
+import HmHeader from "./components/header/header.component";
 
 function App(): JSX.Element {
   return (

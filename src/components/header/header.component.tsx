@@ -1,5 +1,5 @@
 import React from "react";
-import './header.scss';
+import './header.component.scss';
 
 function HmHeader(): JSX.Element {
     return (
