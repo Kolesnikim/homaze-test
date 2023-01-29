@@ -1,8 +1,7 @@
 import React from "react";
 import './dashboard-tile.scss'
 import {IContract} from "../../api/types";
-import { format } from 'date-fns';
-import {stringSliceHelper} from "../../helpers/helpers";
+import { stringSliceHelper } from "../../helpers/helpers";
 
 export type IDashboardTileProps = Partial<IContract>;
 
@@ -16,7 +15,7 @@ function HmDashboardTile(
         totalProject,
         updated_timestmp
     }: IDashboardTileProps): JSX.Element {
-    const formattedDate = format(updated_timestmp ?? 0, 'mm.dd.yyyy');
+    const formattedDate = new Date(updated_timestmp ?? 0).toLocaleDateString();
 
     const getStageClasses = (): string => {
         let defaultClass = 'dashboard-tile__stage';
@@ -40,7 +39,8 @@ function HmDashboardTile(
         return defaultClass
     }
 
-    const calculatedCustomerName = stringSliceHelper(customerName);
+    const calculatedCustomerName = stringSliceHelper(customerName, 25);
+    const calculatedAddress = stringSliceHelper(address, 35);
 
     return (
         <div className='dashboard-tile'>
@@ -50,7 +50,7 @@ function HmDashboardTile(
             </div>
 
             <div className="dashboard-tile__content">
-                <span className='dashboard-tile__address'>{address}</span>
+                <span className='dashboard-tile__address'>{calculatedAddress}</span>
 
                 <div className="dashboard-tile__rooms">
                     {rooms?.map(room => (

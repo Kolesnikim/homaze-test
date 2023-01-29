@@ -1,34 +1,66 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import './dashboard.scss';
 import { contractsActions } from "../../redux/counter/slice";
 import { useAppDispatch, useAppSelector } from "../../redux/counter/hooks";
 import HmDashboardTile from "../../components/dashboard-tile/dashboard-tile";
+import InputComponent from "../../components/dashboard-base-input/dashboard-input.component";
+import {IContract} from "../../api/types";
 
 function HmDashboard(): JSX.Element {
+    const [inputValue, setInputValue] = useState<string>('');
+    const [filteredContracts, setFilteredContracts] = useState<IContract[]>([]);
+
     const dispatch = useAppDispatch();
     const contracts = useAppSelector(state => state.contracts.items);
 
+    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setInputValue(e.target.value);
+    }
 
     useEffect(() => {
         dispatch((contractsActions.loadContracts()));
     }, [])
 
+    useEffect(() => {
+        if (inputValue.length === 1) setFilteredContracts(contracts);
+        if (inputValue.length < 2) return;
+
+        const fc = filteredContracts.filter((contract) => {
+            return contract.customerName.includes(inputValue) || contract.address.includes(inputValue);
+        })
+
+        setFilteredContracts(fc);
+    }, [inputValue])
+
+    useEffect(() => {
+        setFilteredContracts(contracts);
+    }, [contracts])
+
     return (
         <div className="hm-dashboard">
-            {
-                contracts.map((contract) => (
-                    <HmDashboardTile
-                        key={contract.projectId}
-                        customerName={contract.customerName}
-                        projectId={contract.projectId}
-                        address={contract.address}
-                        projectState={contract.projectState}
-                        rooms={contract.rooms}
-                        totalProject={contract.totalProject}
-                        updated_timestmp={contract.updated_timestmp}
-                    />
-                ))
-            }
+            <div className="hm-dashboard__search">
+                <InputComponent
+                    placeholder="Search customer"
+                    onChange={onInputChange}
+                    value={inputValue}
+                />
+            </div>
+            <div className="hm-dashboard__tiles-wrapper">
+                {
+                    filteredContracts.map((contract) => (
+                        <HmDashboardTile
+                            key={contract.projectId}
+                            customerName={contract.customerName}
+                            projectId={contract.projectId}
+                            address={contract.address}
+                            projectState={contract.projectState}
+                            rooms={contract.rooms}
+                            totalProject={contract.totalProject}
+                            updated_timestmp={contract.updated_timestmp}
+                        />
+                    ))
+                }
+            </div>
         </div>
     );
 }

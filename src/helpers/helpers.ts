@@ -1,6 +1,6 @@
 
-export function stringSliceHelper(str = ''): string {
-    if (str === "") return str;
+export function stringSliceHelper(str = '', amount: number): string {
+    if (str === "") return 'Customer';
     
-    return str.length > 30 ? `${str.slice(0, 25)}...` : str;
+    return str.length > 30 ? `${str.slice(0, amount)}...` : str;
 }

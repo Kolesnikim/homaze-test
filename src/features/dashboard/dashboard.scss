@@ -1,12 +1,20 @@
 .hm-dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  grid-gap: 26px;
-  justify-items: center;
-  justify-content: center;
+  display: flex;
+  flex-direction: column;
   width: 70%;
   margin: 0 auto;
   background: #FFFFFF;
   border: 1px solid #DDEDF4;
   border-radius: 9px;
+
+  &__tiles-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-gap: 26px;
+    margin: 0 30px;
+  }
+
+  &__search {
+    margin: 27px 0 20px 30px;
+  }
 }
