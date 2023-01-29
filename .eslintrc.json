@@ -25,5 +25,7 @@
       }
     }
   },
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/naming-convention": "warn"
+  }
 }

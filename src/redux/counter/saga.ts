@@ -1,41 +1,23 @@
-import { delay, put, takeEvery, Effect, ForkEffect } from 'redux-saga/effects';
-import { PayloadAction } from '@reduxjs/toolkit';
-import { counterActions } from './slice';
+import { Effect, ForkEffect, call, put, takeEvery } from 'redux-saga/effects';
+import { contractsActions } from './slice';
+import {ContractsApi} from "../../api/api";
+import {IContract} from "../../api/types";
 
-export function* watchIncrementAsync(): Generator<Effect, void> {
-  yield delay(1000);
-  yield put(counterActions.increment());
-}
-
-export function* watchDecrementAsync(): Generator<Effect, void> {
-  yield delay(1000);
-  yield put(counterActions.decrement());
-}
-
-export function* watchIncrementByAmountAsync(
-  action: PayloadAction<any>
-): Generator<Effect, void> {
+export function* watchLoadContracts(): Generator<Effect, void> {
   try {
-    if (typeof action.payload !== 'number') {
-      throw new Error('Invalid parameter');
-    }
-    yield delay(1000);
-    yield put(counterActions.incrementByAmount(action.payload));
-    yield put(counterActions.incrementByAmountAsyncSuccess());
-  } catch (error) {
-    yield put(counterActions.incrementByAmountAsyncFailure());
+    const contracts = yield call(ContractsApi.getAll);
+
+    yield put(contractsActions.addContracts(contracts as IContract[]));
+  } catch (e) {
+    yield put(contractsActions.loadingFailed());
+
   }
 }
 
-export function* watchCounterSagas(): Generator<ForkEffect, void> {
-  yield takeEvery(counterActions.incrementAsync, watchIncrementAsync);
-  yield takeEvery(counterActions.decrementAsync, watchDecrementAsync);
-  yield takeEvery(
-    counterActions.incrementByAmountAsync,
-    watchIncrementByAmountAsync
-  );
+export function* watchContractsSagas(): Generator<ForkEffect, void> {
+  yield takeEvery(contractsActions.loadContracts, watchLoadContracts);
 }
 
-const counterSagas = watchCounterSagas;
+const contractsSagas = watchContractsSagas;
 
-export default counterSagas;
+export default contractsSagas;

@@ -7,7 +7,7 @@ import './index.scss';
 import App from './App';
 import { store } from './redux/store';
 import reportWebVitals from './reportWebVitals';
-import Dashboard from "./features/dashboard/Dashboard";
+import HmDashboard from "./features/dashboard/dashboard";
 
 const router = createBrowserRouter([
     {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Dashboard />,
+                element: <HmDashboard />,
             },
         ],
     },

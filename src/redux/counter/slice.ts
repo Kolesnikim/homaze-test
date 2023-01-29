@@ -1,33 +1,47 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction} from '@reduxjs/toolkit';
+import { IContract } from "../../api/types";
 
-export interface ICounterSlice {
-  value: number;
+export interface IContractsState {
+  items: IContract[];
+  loading: boolean,
+  error: boolean
 }
 
-const initialState: ICounterSlice = {
-  value: 0,
+const initialState: IContractsState = {
+  items: [],
+  loading: false,
+  error: false
 };
 
-export const counterSlice = createSlice({
-  name: 'counter',
+export const contractsSlice = createSlice({
+  name: 'contracts',
   initialState,
   reducers: {
-    increment: (state) => {
-      state.value += 1;
+    loadContracts: (state) => {
+      return {
+        ...state,
+        loading: true,
+        error: false
+      }
     },
-    decrement: (state) => {
-      state.value -= 1;
+    addContracts: (state, action: PayloadAction<IContract[]>) => {
+      return {
+        ...state,
+        items: action.payload,
+        loading: false,
+        error: false
+      }
+      },
+    loadingFailed: (state) => {
+      return {
+        ...state,
+        items: [],
+        loading: false,
+        error: true
+      }
     },
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value += action.payload;
-    },
-    incrementAsync: (state) => {},
-    decrementAsync: (state) => {},
-    incrementByAmountAsync: (state, action: PayloadAction<number>) => {},
-    incrementByAmountAsyncSuccess: (state) => {},
-    incrementByAmountAsyncFailure: (state) => {},
   },
 });
 
-export const { actions: counterActions, reducer: counterReducer } =
-  counterSlice;
+export const { actions: contractsActions, reducer: contractsReducer } =
+  contractsSlice;

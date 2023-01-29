@@ -1,7 +1,7 @@
-import { counterReducer } from './counter/slice';
+import { contractsReducer } from './counter/slice';
 
 const rootReducer = {
-  counter: counterReducer,
+  contracts: contractsReducer,
 };
 
 export default rootReducer;

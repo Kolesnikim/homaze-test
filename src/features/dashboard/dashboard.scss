@@ -1,0 +1,12 @@
+.hm-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-gap: 26px;
+  justify-items: center;
+  justify-content: center;
+  width: 70%;
+  margin: 0 auto;
+  background: #FFFFFF;
+  border: 1px solid #DDEDF4;
+  border-radius: 9px;
+}
