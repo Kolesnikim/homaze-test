@@ -1,4 +1,4 @@
-import React, {CSSProperties} from "react";
+import React from "react";
 import { FaSearch } from 'react-icons/fa'
 import './icon.component.scss'
 import {IIconProps, TIconType} from "./icon.types";

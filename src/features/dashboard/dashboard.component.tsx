@@ -28,7 +28,7 @@ function HmDashboard(): JSX.Element {
             return;
         }
 
-        const fc = contracts.filter((contract) => {
+        const fc = contracts.filter((contract: IContract) => {
             return contract.customerName.includes(inputValue) || contract.address.includes(inputValue);
         })
 

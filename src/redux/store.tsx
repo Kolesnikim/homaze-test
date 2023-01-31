@@ -3,9 +3,10 @@ import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './rootReducer';
 import rootSaga from './rootSaga';
+import {ToolkitStore} from "@reduxjs/toolkit/dist/configureStore";
 
 
-const configureAppStore = (initialState = {}) => {
+const configureAppStore = (initialState = {}): ToolkitStore => {
   const reduxSagaMonitorOptions = {};
   const sagaMiddleware = createSagaMiddleware(reduxSagaMonitorOptions);
 
